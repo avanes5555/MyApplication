@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
              }).start();
          }
-         // for commit
+         // for commit 1
+         // for commit 2
 
         else if (view.getId() == R.id.btnPrintReceipt) {
             new Thread(new Runnable() {
