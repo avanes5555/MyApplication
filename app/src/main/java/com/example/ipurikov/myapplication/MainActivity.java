@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnPrintReceipt).setOnClickListener(this);
         findViewById(R.id.btnintent).setOnClickListener(this);
         findViewById(R.id.btnX).setOnClickListener(this);
+        findViewById(R.id.btnOpen).setOnClickListener(this);
+
 
 
         // Создание объекта компонента
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Начальная инициализация настройками (тут они могут вычитываться из хранилища приложения, например)
         fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_PORT, String.valueOf(IFptr.LIBFPTR_PORT_BLUETOOTH));
         fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_MACADDRESS, "34:87:3D:5C:BC:12");
+        fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_OFD_CHANNEL, String.valueOf(IFptr.LIBFPTR_OFD_CHANNEL_PROTO));
         
         fptr.applySingleSettings();
     }
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent();
             i.setAction("ru.atol.drivers10.service.PROCESS_TASK");
             i.putExtra("PARAM_REQUEST", "{\n" +
-                    "    \"type\": \"closeShift\",\n" +
+                    "    \"type\": \"reportOfdExchangeStatus\",\n" +
                     "    \"operator\": {\n" +
                     "       \"name\": \"Иванов\",\n" +
                     "       \"vatin\": \"123654789507\"\n" +
@@ -63,14 +66,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(intent, REQUEST_SHOW_SETTINGS);
         }
 
+         else if (view.getId() == R.id.btnOpen) {
+             new Thread(new Runnable() {
+                 @Override
+                 public void run() {
+
+                     fptr.close();
+                     //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_CLOSE_SHIFT);
+                     //fptr.report();
+                 }
+
+             }).start();
+         }
+
+
          else if (view.getId() == R.id.btnX) {
              new Thread(new Runnable() {
                  @Override
                  public void run() {
 
                      fptr.open();
-                     fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_CLOSE_SHIFT);
+                     //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_X);
+                     fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_OFD_EXCHANGE_STATUS);
                      fptr.report();
+                     //fptr = new Fptr(getApplication());
                  }
 
              }).start();
@@ -231,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         // Гарантировано чистим объект.
         // Вызов этого метода так же разрывает соединение, если оно установлено.
-        fptr.destroy();
+        //fptr.destroy();
         super.onBackPressed();
     }
 }
