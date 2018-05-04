@@ -89,11 +89,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_X);
                      fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_OFD_EXCHANGE_STATUS);
                      fptr.report();
-                     //fptr = new Fptr(getApplication());
+                     fptr = new Fptr(getApplication());
                  }
 
              }).start();
          }
+         // for commit
 
         else if (view.getId() == R.id.btnPrintReceipt) {
             new Thread(new Runnable() {
