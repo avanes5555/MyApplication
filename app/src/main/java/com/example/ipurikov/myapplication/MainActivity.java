@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnintent).setOnClickListener(this);
         findViewById(R.id.btnX).setOnClickListener(this);
         findViewById(R.id.btnOpen).setOnClickListener(this);
+        findViewById(R.id.btnClose).setOnClickListener(this);
 
 
 
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivityForResult(i, REQUEST_CALL_SERVICE);
 
         }
+         else if (view.getId() == R.id.btnClose) {
+
+            fptr.close();
+        }
+
         else if (view.getId() == R.id.btnShowSettings) {
             Intent intent = new Intent(getApplication(), SettingsActivity.class);
             // Передаем текущие настройки в SettingsActivity.
@@ -67,33 +73,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
          else if (view.getId() == R.id.btnOpen) {
-             new Thread(new Runnable() {
-                 @Override
-                 public void run() {
+             //new Thread(new Runnable() {
+                 //@Override
+                // public void run() {
 
-                     fptr.close();
+                     fptr.open();
                      //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_CLOSE_SHIFT);
                      //fptr.report();
-                 }
+                // }
 
-             }).start();
+            // }).start();
          }
 
 
          else if (view.getId() == R.id.btnX) {
-             new Thread(new Runnable() {
-                 @Override
-                 public void run() {
+            // new Thread(new Runnable() {
+                 //@Override
+                // public void run() {
 
-                     fptr.open();
+                     //fptr.open();
                      //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_X);
                      fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_OFD_EXCHANGE_STATUS);
                      fptr.report();
-                     fptr = new Fptr(getApplication());
+                     //fptr = new Fptr(getApplication());
                  }
 
-             }).start();
-         }
+             //}).start();
+        // }
          // for commit 1
          // for commit 2
 
