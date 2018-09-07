@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import ru.atol.drivers10.fptr.Fptr;
 import ru.atol.drivers10.fptr.IFptr;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_SHOW_SETTINGS = 1;
     private static final int REQUEST_CALL_SERVICE = 2;
     private IFptr fptr;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +32,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnX).setOnClickListener(this);
         findViewById(R.id.btnOpen).setOnClickListener(this);
         findViewById(R.id.btnClose).setOnClickListener(this);
+        findViewById(R.id.btnZ).setOnClickListener(this);
+        findViewById(R.id.btnReq) .setOnClickListener(this);
+        findViewById(R.id.btnCrc) .setOnClickListener(this);
 
 
 
-        // Создание объекта компонента
-        fptr = new Fptr(getApplication());
 
-        // Начальная инициализация настройками (тут они могут вычитываться из хранилища приложения, например)
-        fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_PORT, String.valueOf(IFptr.LIBFPTR_PORT_BLUETOOTH));
-        fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_MACADDRESS, "34:87:3D:5C:BC:12");
-        fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_OFD_CHANNEL, String.valueOf(IFptr.LIBFPTR_OFD_CHANNEL_PROTO));
-        
-        fptr.applySingleSettings();
+        if (fptr == null) {
+            // Создание объекта компонента
+            fptr = new Fptr(getApplication());
+
+
+
+
+
+
+
+
+
+
+            // Начальная инициализация настройками (тут они могут вычитываться из хранилища приложения, например)
+            fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_PORT, String.valueOf(IFptr.LIBFPTR_PORT_BLUETOOTH));
+            fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_MACADDRESS, "34:87:3D:5C:BC:12");
+            //fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_PORT, String.valueOf(IFptr.LIBFPTR_PORT_TCPIP));
+            //fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_IPPORT, "5555");
+            //fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_IPADDRESS, "192.168.43.133");
+            fptr.setSingleSetting(IFptr.LIBFPTR_SETTING_OFD_CHANNEL, String.valueOf(IFptr.LIBFPTR_OFD_CHANNEL_NONE));
+
+            fptr.applySingleSettings();
+        }
     }
 
     @Override
@@ -50,19 +71,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent();
             i.setAction("ru.atol.drivers10.service.PROCESS_TASK");
             i.putExtra("PARAM_REQUEST", "{\n" +
-                    "    \"type\": \"reportOfdExchangeStatus\",\n" +
-                    "    \"operator\": {\n" +
-                    "       \"name\": \"Иванов\",\n" +
-                    "       \"vatin\": \"123654789507\"\n" +
-                    "    }\n" +
-                    "}");
+                     "                     \"type\": \"sellCorrection\",\n" +
+                     "                     \"taxationType\": \"osn\",\n" +
+                     "\n" +
+                     "                     \"correctionType\": \"self\",\n" +
+                     "                     \"correctionBaseDate\": \"2017.07.25\",\n" +
+                     "                     \"correctionBaseNumber\": \"1175\",\n" +
+                     "                     \"correctionBaseName\": \"Акт технического заключения\",\n" +
+                     "\n" +
+                     "                     \"operator\": {\n" +
+                     "                 \"name\": \"Иванов\",\n" +
+                     "                         \"vatin\": \"123654789507\"\n" +
+                     "             },\n" +
+                     "\n" +
+                     "             \"payments\": [\n" +
+                     "             {\n" +
+                     "                 \"type\": \"cash\",\n" +
+                     "                     \"sum\": 2000.00\n" +
+                     "             }\n" +
+                     "    ],\n" +
+                     "\n" +
+                     "             \"taxes\": [\n" +
+                     "             {\n" +
+                     "                 \"type\": \"vat18\",\n" +
+                     "                     \"sum\": 10.0\n" +
+                     "             },\n" +
+                     "             {\n" +
+                     "                 \"type\": \"vat10\",\n" +
+                     "                     \"sum\": 15.0\n" +
+                     "             }\n" +
+                     "    ]\n" +
+                     "}");
+
+
             startActivityForResult(i, REQUEST_CALL_SERVICE);
 
         }
+
+        else if (view.getId() == R.id.btnReq) {
+             Intent i = new Intent();
+             i.setAction("ru.atol.drivers10.service.PROCESS_TASK");
+             i.putExtra("PARAM_REQUEST", "{\n" +
+                     "    \"type\": \"getShiftTotals\",\n" +
+                     "    \"operator\": {\n" +
+                     "       \"name\": \"Иванов\",\n" +
+                     "       \"vatin\": \"123654789507\"\n" +
+                     "    }\n" +
+                     "}");
+             startActivityForResult(i, REQUEST_CALL_SERVICE);
+         }
+
+
          else if (view.getId() == R.id.btnClose) {
 
             fptr.close();
         }
+
+        else if (view.getId() == R.id.btnCrc) {
+
+             fptr.setParam(IFptr.LIBFPTR_PARAM_JSON_DATA, "{\"correctionBaseDate\":\"2018.08.27\",\"correctionBaseName\":\"ПАТАМУШТА\",\"correctionBaseNumber\":\"100\",\"correctionType\":\"instruction\",\"operator\":{\"name\":\"Кассир Кассирыч\"},\"payments\":[{\"sum\":123,\"type\":\"cash\"},{\"sum\":123.25,\"type\":\"6\"}],\"taxationType\":\"osn\",\"taxes\":[{\"sum\":0.0,\"type\":\"none\"}],\"type\":\"sellCorrection\"}");
+             fptr.processJson();
+
+             String result = fptr.getParamString(IFptr.LIBFPTR_PARAM_JSON_DATA);
+
+         }
 
         else if (view.getId() == R.id.btnShowSettings) {
             Intent intent = new Intent(getApplication(), SettingsActivity.class);
@@ -71,6 +143,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra(SettingsActivity.DEVICE_SETTINGS, fptr.getSettings());
             startActivityForResult(intent, REQUEST_SHOW_SETTINGS);
         }
+
+
+
 
          else if (view.getId() == R.id.btnOpen) {
              //new Thread(new Runnable() {
@@ -93,7 +168,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                      //fptr.open();
                      //fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_X);
+             fptr.cancelReceipt();
                      fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_OFD_EXCHANGE_STATUS);
+                     fptr.report();
+                     fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE ,IFptr.LIBFPTR_RT_OFD_TEST);
                      fptr.report();
                      //fptr = new Fptr(getApplication());
                  }
@@ -102,11 +180,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // }
          // for commit 1
          // for commit 2
+        else if (view.getId() == R.id.btnZ) {
 
+             fptr.setParam(IFptr.LIBFPTR_PARAM_REPORT_TYPE, IFptr.LIBFPTR_RT_CLOSE_SHIFT);
+             fptr.report();
+             fptr.setParam(1021, "Кассир Иванов И.");
+             fptr.setParam(1203, "123456789047");
+             fptr.operatorLogin();
+
+             Calendar c = Calendar.getInstance();
+             c.set(2018, 1, 2);
+             fptr.setParam(1177, "Документ основания коррекции");
+             fptr.setParam(1178, c.getTime());
+             fptr.setParam(1179, "№1234");
+             fptr.utilFormTlv();
+             byte[] correctionInfo = fptr.getParamByteArray(IFptr.LIBFPTR_PARAM_TAG_VALUE);
+
+             fptr.setParam(IFptr.LIBFPTR_PARAM_RECEIPT_TYPE, IFptr.LIBFPTR_RT_SELL_CORRECTION);
+             fptr.setParam(1173, 1);
+             fptr.setParam(1174, correctionInfo);
+             fptr.openReceipt();
+
+             fptr.setParam(IFptr.LIBFPTR_PARAM_SUM, 1000.00);
+             fptr.receiptTotal();
+
+             fptr.closeReceipt();
+
+
+
+
+         }
         else if (view.getId() == R.id.btnPrintReceipt) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+           // new Thread(new Runnable() {
+               // @Override
+               // public void run() {
                     // Соединение с ККТ
                     fptr.open();
 
@@ -231,9 +338,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
-            }).start();
+            //}).start();
         }
-    }
+    //}
 
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == REQUEST_SHOW_SETTINGS && resultCode == Activity.RESULT_OK) {

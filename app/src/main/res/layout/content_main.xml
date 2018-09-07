@@ -18,7 +18,7 @@
 
         <Button
             android:id="@+id/btnShowSettings"
-            android:layout_width="152dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Настройки"
             tools:layout_editor_absoluteX="0dp"
@@ -27,7 +27,7 @@
         <Button
             android:id="@+id/btnintent"
             android:layout_width="152dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:baselineAligned="true"
             android:text="json" />
@@ -41,9 +41,15 @@
             tools:layout_editor_absoluteY="0dp" />
 
         <Button
+            android:id="@+id/btnZ"
+            android:layout_width="153dp"
+            android:layout_height="wrap_content"
+            android:text="Закрыть смену" />
+
+        <Button
             android:id="@+id/btnX"
             android:layout_width="152dp"
-            android:layout_height="33dp"
+            android:layout_height="25dp"
             android:layout_weight="1"
             android:text="X - отчет" />
 
@@ -51,7 +57,7 @@
             android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Disable" />
+            android:text="Disable Port" />
 
         <Button
             android:id="@+id/btnOpen"
@@ -59,6 +65,20 @@
             android:layout_height="wrap_content"
             android:text="Enable Port" />
 
+        <Button
+            android:id="@+id/btnReq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCrc"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Correction"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="8dp" />
 
 </android.support.constraint.ConstraintLayout>
