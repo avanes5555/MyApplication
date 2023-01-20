@@ -17,39 +17,9 @@
         tools:layout_editor_absoluteY="8dp">
 
         <Button
-            android:id="@+id/btnShowSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Настройки"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <Button
-            android:id="@+id/btnintent"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:baselineAligned="true"
-            android:text="json" />
-
-        <Button
-            android:id="@+id/btnPrintReceipt"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:text="Печать чекa"
-            tools:layout_editor_absoluteX="118dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <Button
-            android:id="@+id/btnZ"
-            android:layout_width="153dp"
-            android:layout_height="wrap_content"
-            android:text="Закрыть смену" />
-
-        <Button
             android:id="@+id/btnX"
-            android:layout_width="152dp"
-            android:layout_height="25dp"
+            android:layout_width="383dp"
+            android:layout_height="115dp"
             android:layout_weight="1"
             android:text="X - отчет" />
 
@@ -71,14 +41,46 @@
             android:layout_height="wrap_content"
             android:text="Request" />
 
+        <Button
+            android:id="@+id/btnShowSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Настройки" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/btnCrc"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_width="159dp"
+        android:layout_height="54dp"
         android:text="Correction"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="559dp" />
+
+    <Button
+        android:id="@+id/btnintent"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:baselineAligned="true"
+        android:text="json"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <Button
+        android:id="@+id/btnPrintReceipt"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:text="Печать чекa"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="463dp" />
+
+    <Button
+        android:id="@+id/btnZ"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:text="Закрыть смену"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="511dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
