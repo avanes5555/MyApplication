@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.atol.drivers10.fptr"
+    android:versionCode="100902000"
+    android:versionName="10.9.2.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="26" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <activity
+            android:name="ru.atol.drivers10.fptr.settings.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name="ru.atol.drivers10.fptr.settings.BluetoothSettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Bluetooth" />
+        <activity
+            android:name="ru.atol.drivers10.fptr.settings.TCPSettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="TCP/IP" />
+        <activity
+            android:name="ru.atol.drivers10.fptr.settings.TTYSettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="COM / TTY" />
+        <!--
+        activity
+                android:name=".MainActivity"
+                android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity
+        -->
+    </application>
+
+</manifest>

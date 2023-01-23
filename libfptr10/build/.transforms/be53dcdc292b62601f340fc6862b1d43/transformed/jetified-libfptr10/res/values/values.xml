@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fields_margin">10dp</dimen>
+    <string name="hint_bt_disable">При завершении работы выключать модуль Bluetooth</string>
+    <string name="hint_bt_enable">При необходимости включать модуль Bluetooth</string>
+    <string name="setting_bt_disable">Выключать Bluetooth</string>
+    <string name="setting_bt_enable">Включать Bluetooth</string>
+    <string name="title_activity_settings">Настройки ККТ</string>
+</resources>

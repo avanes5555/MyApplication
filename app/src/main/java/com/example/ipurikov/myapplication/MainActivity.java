@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnZ).setOnClickListener(this);
         findViewById(R.id.btnReq) .setOnClickListener(this);
         findViewById(R.id.btnCrc) .setOnClickListener(this);
-
+        androidx.appcompat.widget.Toolbar tb = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
 
 
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Создание объекта компонента
             fptr = new Fptr(getApplication());
 
-
+            tb.setTitle(fptr.version());
 
 
 
