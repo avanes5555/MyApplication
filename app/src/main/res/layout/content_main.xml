@@ -14,7 +14,8 @@
         android:layout_height="458dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/btnShowSettings"

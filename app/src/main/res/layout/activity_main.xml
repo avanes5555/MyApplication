@@ -20,10 +20,86 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        layout="@layout/content_main"
-        android:layout_width="386dp"
-        tools:layout_editor_absoluteX="15dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="394dp"
+        android:layout_height="592dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.ipurikov.myapplication.MainActivity"
+        tools:layout_editor_absoluteY="203dp"
+        tools:showIn="@layout/activity_main">
+
+        <LinearLayout
+            android:layout_width="374dp"
+            android:layout_height="458dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <Button
+                android:id="@+id/btnintent"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:baselineAligned="true"
+                android:text="json" />
+
+            <Button
+                android:id="@+id/btnShowSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Настройки"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <Button
+                android:id="@+id/btnPrintReceipt"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:text="Печать чекa"
+                tools:layout_editor_absoluteX="118dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <Button
+                android:id="@+id/btnZ"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:text="Закрыть смену" />
+
+            <Button
+                android:id="@+id/btnX"
+                android:layout_width="152dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="X - отчет" />
+
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Disable Port" />
+
+            <Button
+                android:id="@+id/btnOpen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Port" />
+
+            <Button
+                android:id="@+id/btnCrc"
+                android:layout_width="152dp"
+                android:layout_height="48dp"
+                android:text="Correction" />
+
+            <Button
+                android:id="@+id/btnReq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Request" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
